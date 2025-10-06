@@ -5,8 +5,8 @@ def load_data():
     """
     Load the Wine dataset and return the features and target values.
     Returns:
-        X (numpy.ndarray): The features of the Digits dataset.
-        y (numpy.ndarray): The target values of the Digits dataset.
+        X (numpy.ndarray): The features of the Wine dataset.
+        y (numpy.ndarray): The target values of the Wine dataset.
     """
     digits = load_wine()
     X = digits.data
