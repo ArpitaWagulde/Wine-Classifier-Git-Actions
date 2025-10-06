@@ -11,7 +11,7 @@ def fit_model(X_train, y_train):
     """
     model = LogisticRegression(max_iter=5000, random_state=42)
     model.fit(X_train, y_train)
-    joblib.dump(model, "../model/wine_model.pkl")
+    joblib.dump(model, "model/wine_model.pkl")
 
 if __name__ == "__main__":
     X, y = load_data()
