@@ -1,5 +1,5 @@
-name: 2. Model Retraining on Push to Main
-run-name: Model Retraining
+name: 2. Model Versioning on Push to Main
+run-name: Model Versioning
 
 on:
   workflow_run:
@@ -19,37 +19,17 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: 3.9
-      
-      - name: Install dependencies
-        run: pip install -r requirements.txt
-
       - name: Generate and Store Timestamp
         run: |
           timestamp=$(date '+%Y%m%d%H%M%S')
           echo "$timestamp" > timestamp.txt
         id: timestamp
       
-      - name: Check File Permissions
-        run: |
-          ls -l ./src/train.py
-
-      - name: Set File Permissions
-        run: |
-          chmod +x ./src/train.py
-
-      - name: Retrain Model
-        run: |
-          timestamp=$(cat timestamp.txt)
-          python ./src/train.py --timestamp "$timestamp"
-      
-      - name: Verify Model File Creation
+      - name: Save versioned Model File
         run: |
           timestamp=$(cat timestamp.txt)
           model_filename="wine_model_${timestamp}.joblib"
+          mv model/wine_model.joblib $GITHUB_WORKSPACE/model/$model_filename
           if [ -f "model/$model_filename" ]; then
             echo "Model file $model_filename created successfully."
           else
