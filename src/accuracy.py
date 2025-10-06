@@ -10,7 +10,7 @@ def get_model_accuracy():
     """
     X, y = load_data()
     _, X_test, _, y_test = split_data(X, y)
-    model = joblib.load("model/wine_model.pkl")
+    model = joblib.load("model/wine_model.joblib")
     y_pred = model.predict(X_test)
     accuracy = accuracy_score(y_test, y_pred)
     return accuracy
