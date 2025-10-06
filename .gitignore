@@ -1,0 +1,4 @@
+/git_actions_lab2_env/
+src/__pycache__/
+test/__pycache__/
+.DS_Store
