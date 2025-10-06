@@ -42,11 +42,16 @@ jobs:
           timestamp=$(cat timestamp.txt)
           python ./src/train.py --timestamp "$timestamp"
       
-      - name: Store and Version the New Model
+      - name: Verify Model File Creation
         run: |
           timestamp=$(cat timestamp.txt)
           model_filename="wine_model_${timestamp}.joblib"
-          mv model/$model_filename $GITHUB_WORKSPACE/model/$model_filename
+          if [ -f "model/$model_filename" ]; then
+            echo "Model file $model_filename created successfully."
+          else
+            echo "Model file $model_filename not found!"
+            exit 1
+          fi
 
       - name: Commit and Push Changes
         run: |
